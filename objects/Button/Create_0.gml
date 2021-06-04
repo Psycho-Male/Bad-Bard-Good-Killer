@@ -1,0 +1,2 @@
+SetImageScale(GUISCALE);
+func=undefined;
