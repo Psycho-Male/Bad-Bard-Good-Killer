@@ -38,6 +38,9 @@ function GetNote(_x,_y,_note,_level){
     }
 }
 function GetMiniGame(_sheet,_level,_tempo){
+    with par_bard{
+        sprite_index=sprite_play;
+    }
     with instance_create_layer(Camera.gui_w*.25,Camera.gui_h*.20,0,MiniGame){
         current_sheet=sheets[_sheet];
         level=_level;

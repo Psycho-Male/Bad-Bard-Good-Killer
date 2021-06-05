@@ -17,6 +17,7 @@ function fail(){
     //Destroy();
     state_current=state_fail;
     MiniGame.wrong_count++;
+    SfxPlay([sfx_missplay1,sfx_missplay2,sfx_missplay3]);
     if MiniGame.wrong_count%5==0{NegativeCheer();}
 }
 function success(){

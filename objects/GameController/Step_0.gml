@@ -1,8 +1,10 @@
 if IsDefined(goto){
     goto_alpha+=goto_fade*alphaSpeed;
-    if goto_alpha==1{
+    if goto_alpha>=1&&goto_fade==1{
         goto_fade=-1;
         room_goto(goto);
+    }else if goto_alpha<=0&&goto_fade==-1{
+        goto=undefined;
     }
 }
 if kp_tab{
@@ -33,10 +35,5 @@ if room=rm_main_menu{
     }
 }
 if kp_t{
-    with obj_point{
-        if random(1)>.4{
-            GetSpeechbox(obj_point,"Test");
-            break;
-        }
-    }
+    MONEY+=1000;
 }

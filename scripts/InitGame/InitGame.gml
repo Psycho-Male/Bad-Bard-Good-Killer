@@ -102,3 +102,11 @@ function ClampCycle(_value,_max,_min) {//max recrusive
     var _mod=_max;
     return _value%_mod;
 }
+function MoveTo(_idMove,_targetCode,_offX,_offY){
+    _offX=SetUndefined(_offX,0);
+    _offY=SetUndefined(_offY,0);
+    with obj_character_position if code==_targetCode{
+        _idMove.x=x+_offX;
+        _idMove.y=y+_offY;
+    }
+}

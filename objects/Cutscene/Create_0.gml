@@ -1,7 +1,9 @@
 current_sequence=undefined;
+current_bard=noone;
 step=0;
 sequence_alpha=1;
 sequence1_text=saveSection+" was a passionate, but talentless bard. All he wanted was peoples attention, love and money. Tonight "+playerName+" will play in a famous tavern with known musicians, 'I can finally show my true potential!', thought "+playerName+"...";
+assasination1_text=playerName+" is now one step closer to being acknowledged bard in town. No one would ever take the risk "+playerName+" took, no one is passionate about this as much as "+playerName+", they don't deserve no fame, love nor money. This is real art, she's deserves everything...";
 textbox={
     init:function(){
         sprite=spr_textbox;
@@ -36,14 +38,14 @@ function sequence_opening(){
     switch step{
         case 0:
         DrawFade(sequence_alpha);
-        DrawSpriteExt(spr_player,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+        DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
         if textbox.draw(sequence1_text){
             if kp_anykey{step++;}
         }
         break;case 1:
         if sequence_alpha>0{
             DrawFade(sequence_alpha);
-            DrawSpriteExt(spr_player,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+            DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
             sequence_alpha-=alphaSpeed;
         }else{
             step++;
@@ -51,6 +53,8 @@ function sequence_opening(){
         break;case 2:
         current_sequence=undefined;
         GetMiniGame(0,1,60);
+        GAMESTATE++;
+        Destroy();
         break;
     }
 }
@@ -79,6 +83,7 @@ function sequence_choose_target(){
         }
         sequence_alpha=0;
         step++;
+        BgmPlay(bgm_tension);
         break;case 1:
         DrawFade(sequence_alpha);
         if sequence_alpha<1{
@@ -91,21 +96,114 @@ function sequence_choose_target(){
         DrawFade(sequence_alpha);
         bard_selection=ClampCycle(bard_selection+inpHorizontal,array_length(bards));
         draw_bards(bards,sequence_alpha,bard_selection);
-        var _currentBard=bards[bard_selection];
-        var _name=_currentBard.name;
-        var _cost=_currentBard.cost;
-        var _text="Attempt to kill "+_name+" for "+str(_cost)+"?";
+        current_bard=bards[bard_selection];
+        var _name=current_bard.name;
+        var _cost=current_bard.cost;
+        var _text="Assasinate "+_name+" for "+str(_cost)+"?";
         DrawSetAlignColor(fa_middle,fa_center,c_white,1);
         draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.2,_text,GUISCALE,GUISCALE,0);
         draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.8,"Press ESC to skip.",GUISCALE,GUISCALE,0);
         if kp_escape{
-            step++;
-        }else if kp_enter{
-            if MONEY>=_currentBard.cost{
-                MONEY-=_currentBard.cost;
+            //step++;
+        }else if kp_enter&&MONEY>=current_bard.cost{
+            MONEY-=current_bard.cost;
+            with par_bard{
+                visible=false;
             }
+            step++;
+            GameController.goto=rm_backstage1;
         }
         break;case 3:
+        if room==rm_backstage1{
+            step=0;
+            current_sequence=sequence_assasination;
+            sequence_alpha=1;
+        }
+        break;
+    }
+}
+function sequence_assasination(){
+    switch step{
+        case 0:
+        timer=1;
+        DrawFade(sequence_alpha);
+        MoveTo(current_bard,"target");
+        MoveTo(obj_player,"killer1");
+        with current_bard{
+            visible=true;
+            image_xscale=GUISCALE+1;
+            image_yscale=GUISCALE+1;
+        }
+        with obj_player{
+            visible=true;
+            image_xscale=-(GUISCALE+1);
+            image_yscale=GUISCALE+1;
+        }
+        sequence_alpha-=alphaSpeed;
+        //if sequence_alpha<=0{
+        if kp_anykey{
+            GetSpeechbox(current_bard,"Ew, it's "+playerName+", shoo, shoo!!");
+            step++;
+            timer=.5;
+            sequence_alpha=1;
+        }
+        break;case 1:
+        timer-=1/60;
+        DrawFade(sequence_alpha);
+        //if timer<=0{
+        if kp_anykey{
+            timer=.5;
+            MoveTo(obj_player,"killer2");
+            with obj_player{
+                sprite_index=sprite_attack;
+                image_speed=0;
+            }
+            step++;
+        }
+        break;case 2:
+        timer-=1/60;
+        //if timer<0{
+        if kp_anykey{
+            timer=.15;
+            step++;
+            GetSpeechbox(current_bard,"HEEEEELP!!!");
+            with obj_player{
+                sprite_index=sprite_attack;
+                image_speed=1;
+            }
+            sequence_alpha=0;
+        }
+        break;case 3:
+        timer-=1/60;
+        //if timer<=0{
+        if kp_anykey{
+            step++;
+        }
+        break;case 4:
+        DrawFade(sequence_alpha);
+        sequence_alpha+=alphaSpeed;
+        //if sequence_alpha>=1{
+        if kp_anykey{
+            step++;
+        }
+        break;case 5:
+        DrawFade(sequence_alpha);
+        DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+        if textbox.draw(assasination1_text){
+            if kp_anykey{step++;}
+        }
+        break;case 6:
+        DrawFade(sequence_alpha);
+        BgmStop(bgm_tension);
+        //GameController.goto=rm_stage1;
+        //if room==rm_stage1{
+            Destroy(current_bard);
+            room_goto(rm_stage1);
+            with par_bard{visible=true;}
+            GAMESTATE++;
+            Destroy();
+            GetMiniGame(0,1,60);
+        //}
         break;
     }
 }

@@ -30,6 +30,14 @@ button_x=Camera.gui_w/2;
 button_y=[Camera.gui_h*.20,Camera.gui_h*.30,Camera.gui_h*.40];
 var _func=function(){
     GameController.goto=room_next(room);
+    CreateDepth(obj_bard1);
+    CreateDepth(obj_bard2);
+    CreateDepth(obj_bard3);
+    CreateDepth(obj_player);
+    with par_bard{
+        image_xscale=GUISCALE;
+        image_yscale=GUISCALE;
+    }
 }
 buttons=[
 GetButton(button_x,Camera.gui_h*.20,"Start Game",_func),

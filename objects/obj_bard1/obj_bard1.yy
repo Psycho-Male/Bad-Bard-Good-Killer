@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_bard1",
-    "path": "sprites/spr_bard1/spr_bard1.yy",
+    "name": "spr_bard1_idle",
+    "path": "sprites/spr_bard1_idle/spr_bard1_idle.yy",
   },
   "solid": false,
   "visible": true,
@@ -25,7 +25,11 @@
   "physicsShapePoints": [],
   "eventList": [],
   "properties": [],
-  "overriddenProperties": [],
+  "overriddenProperties": [
+    {"propertyId":{"name":"sprite_idle","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard1_idle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"sprite_play","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard1_play","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"position_code","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"1","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+  ],
   "parent": {
     "name": "Bards",
     "path": "folders/Bards.yy",

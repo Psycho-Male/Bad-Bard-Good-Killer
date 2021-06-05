@@ -38,6 +38,9 @@ function state_normal(){
             }
             GetNote(Camera.gui_w*.75,_y,_note,level);
         }else if !Exists(MusicNote){
+            with par_bard{
+                sprite_index=sprite_idle;
+            }
             state_current=state_end;
         }
     }

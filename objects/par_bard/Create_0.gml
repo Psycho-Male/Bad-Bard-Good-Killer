@@ -13,5 +13,5 @@ function draw_name(_x,_y){
     draw_text_transformed(_x,_y,name,GUISCALE,GUISCALE,0);
 }
 function draw_cost(_x,_y){
-    draw_text_transformed(_x,_y,"Assasination Cost: "+str(cost),GUISCALE,GUISCALE,0);
+    draw_text_transformed(_x,_y,"Cost: "+str(cost),GUISCALE,GUISCALE,0);
 }

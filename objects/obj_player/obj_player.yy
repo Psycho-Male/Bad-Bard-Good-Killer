@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_player",
-    "path": "sprites/spr_player/spr_player.yy",
+    "name": "spr_bard4_idle",
+    "path": "sprites/spr_bard4_idle/spr_bard4_idle.yy",
   },
   "solid": false,
   "visible": true,
@@ -25,7 +25,12 @@
   "physicsShapePoints": [],
   "eventList": [],
   "properties": [],
-  "overriddenProperties": [],
+  "overriddenProperties": [
+    {"propertyId":{"name":"sprite_idle","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard4_idle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"sprite_play","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_player_play","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"sprite_attack","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard4_attack","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"position_code","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"player","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+  ],
   "parent": {
     "name": "Bards",
     "path": "folders/Bards.yy",

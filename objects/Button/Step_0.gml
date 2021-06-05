@@ -8,6 +8,7 @@ if selected{
     if KEY.mcl{
         image_index=1;
     }else if KEY.mrl||KEY.confirm{
+        SfxPlay(sfx_click1);
         if IsDefined(func){
             func();
         }

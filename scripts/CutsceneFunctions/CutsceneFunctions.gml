@@ -1,4 +1,7 @@
 function GetCutscene(_sequence){
+    if Exists(Cutscene){
+        Destroy(Cutscene);
+    }
     with CreateDepth(Cutscene){
         switch _sequence{
             case stateChooseTarget:
