@@ -41,7 +41,7 @@
     "spriteId": {"name":"spr_bard3_idle","path":"sprites/spr_bard3_idle/spr_bard3_idle.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 0.04,
+    "playbackSpeed": 0.03,
     "playbackSpeedType": 1,
     "autoRecord": true,
     "volume": 1.0,
