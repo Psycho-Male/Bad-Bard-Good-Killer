@@ -15,6 +15,14 @@ globalvar GUISCALE;GUISCALE=3;
 #macro stateThirdKill       6
 #macro stateEnding          7
 globalvar GAMESTATE;GAMESTATE=stateOpening;
+globalvar DEVLOGING;DEVLOGIN=parameter_count==3;
+globalvar MOUSE_ACTIVE;MOUSE_ACTIVE=false;
+globalvar KEY;KEY={
+    confirm:false,
+    mcl:false,
+    mpl:false,
+    mrl:false,
+}
 function DebugAddGuiMessage(_msg){
     ArrayAdd(GameController.debug_text,_msg);
 }
@@ -32,6 +40,12 @@ function DrawSetAlign(_halign,_valign) {
     draw_set_halign(_halign);
     draw_set_valign(_valign);
 }
+function DrawSetAlignColor(_halign,_valign,_color,_alpha){
+    draw_set_halign(_halign);
+    draw_set_valign(_valign);
+    draw_set_color(_color);
+    draw_set_alpha(SetUndefined(_alpha,1));
+}
 function GetMoney(_noteId,_amount,_count){
     repeat _count with instance_create_depth(_noteId.x+8*GUISCALE,_noteId.y,depth-1,obj_money){
         owner=_noteId;
@@ -47,4 +61,24 @@ function PercentageOf(_value,_maxValue){
     _maxValue*=i;
     _value*=i;
     return _value/_maxValue*100;
+}
+function CreateLayer(_index,_layer,_x,_y){
+    _x=SetUndefined(_x,0);
+    _y=SetUndefined(_y,0);
+    _layer=SetUndefined(_layer,"Instances");
+    return instance_create_layer(_x,_y,_layer,_index);
+}
+function CreateDepth(_index,_depth,_x,_y){
+    _x=SetUndefined(_x,0);
+    _y=SetUndefined(_y,0);
+    _depth=SetUndefined(_depth,0);
+    return instance_create_depth(_x,_y,_depth,_index);
+}
+#macro saveName         "save.ini"
+#macro saveSection      "Baduardo"
+function SaveGame(){
+    ini_write(saveName,saveSection,"state",GAMESTATE);
+    ini_write(saveName,saveSection,"score",SCORE);
+    ini_write(saveName,saveSection,"money",MONEY);
+    ini_write(saveName,saveSection,"room",room_get_name(room));
 }

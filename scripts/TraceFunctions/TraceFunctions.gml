@@ -8,24 +8,6 @@ enum LOGLEVEL {
     FATAL,
     NONE
 }
-function txt_append(_file,_text,_writeln) {
-    _writeln=SetUndefined(_writeln,false);
-    if is_real(_file) {
-        _file = _file;
-    } else {
-        var _pos = string_pos(".", _file);
-        var _name = _pos == 0 ? _file+".txt" : _file;
-        _file = file_text_open_append(_name);
-    }
-    //---------------------------------------------------------------------------------------------------------//
-    if is_string(_text) {
-        file_text_write_string(_file, _text);
-    } else if is_real(_text) {
-        file_text_write_real(_file, _text);
-    }
-    if _writeln file_text_writeln(_file);
-    file_text_close(_file);
-}
 function Stringify() {
     var _str=""
     for (var i=0;i<argument_count;i++) _str+=str(argument[i]);	

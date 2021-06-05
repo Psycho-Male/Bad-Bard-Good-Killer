@@ -1,5 +1,15 @@
-if position_meeting(x,y,Pointer){
-    if IsDefined(func){
-        func();
+image_index=0;
+text_color=c_white;
+if MOUSE_ACTIVE{
+    selected=place_meeting(x,y,Pointer);
+}
+if selected{
+    text_color=c_yellow;
+    if KEY.mcl{
+        image_index=1;
+    }else if KEY.mrl||KEY.confirm{
+        if IsDefined(func){
+            func();
+        }
     }
 }

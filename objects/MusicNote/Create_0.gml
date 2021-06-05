@@ -4,17 +4,21 @@ timer=0;
 sustain=false;
 sustain_scale=5;
 sustain_pressed=false;
+color=c_white;
 function fail(){
-    Trace("Failed.");
-    //speed=.5*GUISCALE;
-    //direction=270;
+    x-=spd[level];
+    //Trace("Failed.");
+    speed=.5*GUISCALE;
+    direction=270;
     SCORE-=level*10;
-    MONEY-=level*100;
-    GetMoney(id,-level*100,5);
-    Destroy();
-    //state_current=state_fail;
+    color=c_red;
+    //MONEY-=level*100;
+    //GetMoney(id,-level*100,5);
+    //Destroy();
+    state_current=state_fail;
 }
 function success(){
+    x-=spd[level];
     //speed=.5*GUISCALE;
     //direction=90;
     //friction=.005*GUISCALE;
@@ -33,6 +37,9 @@ function success(){
     //state_current=state_success;
 }
 function state_normal(){
+    if !sustain_pressed{
+        x-=spd[level];
+    }
     if x<MiniGame.press_treshold&&kp_anykey{
         if keyboard_key==key{
             if sustain{
@@ -59,7 +66,7 @@ function state_success(){
 function state_fail(){
     speed+=.005;
     image_alpha-=.02;
-    if y>Camera.gui_h/2{
+    if y>Camera.gui_h/2||image_alpha<=0{
         Destroy();
     }
 }
@@ -80,4 +87,10 @@ function state_sustain(){
         fail();
     }
 }
-state_current=state_normal;
+function state_main_menu(){
+}
+if room==rm_main_menu{
+    state_current=state_main_menu;
+}else{
+    state_current=state_normal;
+}
