@@ -1,3 +1,7 @@
+#macro keycodeUp        0
+#macro keycodeLeft      1
+#macro keycodeDown      2
+#macro keycodeRight     3
 debug_text=[];
 if kp_anykey{
     MOUSE_ACTIVE=false;
@@ -13,3 +17,16 @@ KEY.up=kp_w||kp_up;
 KEY.left=kp_a||kp_left;
 KEY.down=kp_s||kp_down;
 KEY.right=kp_d||kp_right;
+KEY.pressed=undefined;
+if KEY.up{
+    KEY.pressed=keycodeUp;
+}
+if KEY.left{
+    KEY.pressed=keycodeLeft;
+}
+if KEY.down{
+    KEY.pressed=keycodeDown;
+}
+if KEY.right{
+    KEY.pressed=keycodeRight;
+}

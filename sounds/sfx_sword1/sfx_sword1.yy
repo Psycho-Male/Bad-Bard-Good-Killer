@@ -10,14 +10,14 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "Sword_Effect_1.wav",
+  "soundFile": "sfx_sword1.wav",
   "duration": 2.435833,
   "parent": {
     "name": "SFX",
     "path": "folders/SFX.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Sword_Effect_1",
+  "name": "sfx_sword1",
   "tags": [],
   "resourceType": "GMSound",
 }

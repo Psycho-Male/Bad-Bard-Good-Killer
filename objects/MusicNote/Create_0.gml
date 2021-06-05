@@ -10,7 +10,7 @@ function fail(){
     //Trace("Failed.");
     speed=.5*GUISCALE;
     direction=270;
-    SCORE-=level*10;
+    MiniGame.scr-=level*10;
     color=c_red;
     //MONEY-=level*100;
     //GetMoney(id,-level*100,5);
@@ -30,7 +30,7 @@ function success(){
         var _percentage=(100/_maxTreshold)*_pressDiff;
     }
     Trace("_percentage: "+str(_percentage));
-    SCORE+=(level*10+sustain*5)*_percentage;
+    MiniGame.scr+=(level*10+sustain*5)*_percentage;
     MONEY+=level*100;
     GetMoney(id,level*100,5);
     Destroy();
@@ -40,8 +40,8 @@ function state_normal(){
     if !sustain_pressed{
         x-=spd[level];
     }
-    if x<MiniGame.press_treshold&&kp_anykey{
-        if keyboard_key==key{
+    if x<MiniGame.press_treshold&&IsDefined(KEY.pressed){
+        if KEY.pressed==key{
             if sustain{
                 sustain_pressed=true;
                 state_current=state_sustain;

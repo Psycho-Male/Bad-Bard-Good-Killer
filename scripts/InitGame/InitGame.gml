@@ -26,6 +26,7 @@ globalvar KEY;KEY={
     left:false,
     down:false,
     right:false,
+    pressed:undefined,
 }
 function DebugAddGuiMessage(_msg){
     ArrayAdd(GameController.debug_text,_msg);
@@ -51,6 +52,7 @@ function DrawSetAlignColor(_halign,_valign,_color,_alpha){
     draw_set_alpha(SetUndefined(_alpha,1));
 }
 function GetMoney(_noteId,_amount,_count){
+    SfxPlay([sfx_coin1,sfx_coin2,sfx_coin3,sfx_coin4]);
     repeat _count with instance_create_depth(_noteId.x+8*GUISCALE,_noteId.y,depth-1,obj_money){
         owner=_noteId;
         amount=_amount/_count;

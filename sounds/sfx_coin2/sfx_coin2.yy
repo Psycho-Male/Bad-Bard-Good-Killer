@@ -7,17 +7,17 @@
   "type": 0,
   "bitDepth": 1,
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "sfx_low",
+    "path": "audiogroups/sfx_low",
   },
-  "soundFile": "Coin_2.wav",
-  "duration": 0.350229,
+  "soundFile": "sfx_coin2.wav",
+  "duration": 0.443438,
   "parent": {
     "name": "SFX",
     "path": "folders/SFX.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Coin_2",
+  "name": "sfx_coin2",
   "tags": [],
   "resourceType": "GMSound",
 }

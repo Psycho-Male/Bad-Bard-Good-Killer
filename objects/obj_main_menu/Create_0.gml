@@ -19,7 +19,7 @@ function reset_lists(){
     init_notes();
 }
 function key_check(_list){
-    if ds_list_size(_list)>0&&keyboard_key==_list[|0].key{
+    if ds_list_size(_list)>0&&KEY.pressed==_list[|0].key{
         Destroy(_list[|0]);
         DsListDequeue(_list,true);
         return true;

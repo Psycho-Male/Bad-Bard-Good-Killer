@@ -13,25 +13,25 @@ function GetNote(_x,_y,_note,_level){
         level=_level;
         switch sprite_index{
             case noteUp:
-            key=vk_up;
+            key=keycodeUp;
             break;case noteLeft:
-            key=vk_left;
+            key=keycodeLeft;
             break;case noteDown:
-            key=vk_down
+            key=keycodeDown;
             break;case noteRight:
-            key=vk_right;
+            key=keycodeRight;
             break;case sustainUp:
             sustain=true;
-            key=vk_up;
+            key=keycodeUp;
             break;case sustainLeft:
             sustain=true;
-            key=vk_left;
+            key=keycodeLeft;
             break;case sustainDown:
             sustain=true;
-            key=vk_down
+            key=keycodeDown;
             break;case sustainRight:
             sustain=true;
-            key=vk_right;
+            key=keycodeRight;
             break;
         }
         return id;
