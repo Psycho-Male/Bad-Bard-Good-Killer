@@ -19,6 +19,3 @@ if room!=rm_main_menu{
 }else{
     CreateDepth(obj_main_menu);
 }
-if room==rm_stage1{
-    GetMiniGame(0,1,60);
-}

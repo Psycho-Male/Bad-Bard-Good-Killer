@@ -28,8 +28,11 @@ function key_check(_list){
 //--------------------------------------------------//
 button_x=Camera.gui_w/2;
 button_y=[Camera.gui_h*.20,Camera.gui_h*.30,Camera.gui_h*.40];
+var _func=function(){
+    GameController.goto=room_next(room);
+}
 buttons=[
-GetButton(button_x,Camera.gui_h*.20,"Start Game",room_goto_next),
+GetButton(button_x,Camera.gui_h*.20,"Start Game",_func),
 GetButton(button_x,Camera.gui_h*.30,"Credits"),
 GetButton(button_x,Camera.gui_h*.40,"Exit"),
 ];
@@ -49,5 +52,5 @@ lists=[start_sequence,credits_sequence,exit_sequence];
 original_lists=[start_sequence_original,credits_sequence_original,exit_sequence_original];
 active_list=undefined;
 init_notes();
-arrow_keys=[kb_up,kb_left,kb_down,kb_right];
+arrow_keys=[kb_up_old,kb_left_old,kb_down_old,kb_right_old];
 wasd_keys=[kb_w,kb_a,kb_s,kb_d];

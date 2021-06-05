@@ -16,6 +16,8 @@ function fail(){
     //GetMoney(id,-level*100,5);
     //Destroy();
     state_current=state_fail;
+    MiniGame.wrong_count++;
+    if MiniGame.wrong_count%5==0{NegativeCheer();}
 }
 function success(){
     x-=spd[level];
@@ -35,6 +37,8 @@ function success(){
     GetMoney(id,level*100,5);
     Destroy();
     //state_current=state_success;
+    MiniGame.correct_count++;
+    if MiniGame.correct_count%5==0{PositiveCheer();}
 }
 function state_normal(){
     if !sustain_pressed{

@@ -13,6 +13,8 @@ KEY.confirm=kp_enter;
 KEY.mcl=MOUSE_ACTIVE&&mc_left;
 KEY.mpl=MOUSE_ACTIVE&&mp_left;
 KEY.mrl=MOUSE_ACTIVE&&mr_left;
+#macro inpHorizontal        (KEY.right-KEY.left)
+#macro inpVertical          (KEY.down-KEY.up)
 KEY.up=kp_w||kp_up;
 KEY.left=kp_a||kp_left;
 KEY.down=kp_s||kp_down;

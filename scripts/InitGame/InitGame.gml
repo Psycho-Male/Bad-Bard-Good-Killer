@@ -1,3 +1,4 @@
+#macro alphaSpeed       0.01
 randomize();
 globalvar DEBUG;DEBUG={
     enabled:false,
@@ -6,6 +7,7 @@ globalvar DEBUG;DEBUG={
 globalvar SCORE;SCORE=0;
 globalvar MONEY;MONEY=0;
 globalvar GUISCALE;GUISCALE=3;
+globalvar DIFFICULTY;DIFFICULTY=1;
 #macro stateOpening         0
 #macro stateFirstSong       1
 #macro stateFirstKill       2
@@ -14,6 +16,7 @@ globalvar GUISCALE;GUISCALE=3;
 #macro stateThirdSong       5
 #macro stateThirdKill       6
 #macro stateEnding          7
+#macro stateChooseTarget    8
 globalvar GAMESTATE;GAMESTATE=stateOpening;
 globalvar DEVLOGING;DEVLOGIN=parameter_count==3;
 globalvar MOUSE_ACTIVE;MOUSE_ACTIVE=false;
@@ -81,10 +84,21 @@ function CreateDepth(_index,_depth,_x,_y){
     return instance_create_depth(_x,_y,_depth,_index);
 }
 #macro saveName         "save.ini"
-#macro saveSection      "Baduardo"
+#macro saveSection      "Baduardo Ansatsusha"
+#macro playerName       "Baduardo"
+#macro playerSurname    "Ansatsusha"
 function SaveGame(){
     ini_write(saveName,saveSection,"state",GAMESTATE);
     ini_write(saveName,saveSection,"score",SCORE);
     ini_write(saveName,saveSection,"money",MONEY);
     ini_write(saveName,saveSection,"room",room_get_name(room));
+}
+function ClampCycle(_value,_max,_min) {//max recrusive
+    if _max==0{
+        return 0;
+    }
+    _min=SetUndefined(_min,0);
+    if _value<_min return _max-1;
+    var _mod=_max;
+    return _value%_mod;
 }

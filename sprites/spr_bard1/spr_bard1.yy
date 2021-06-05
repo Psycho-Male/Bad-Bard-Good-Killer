@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Import",
-    "path": "folders/Import.yy",
+    "name": "Bards",
+    "path": "folders/Bards.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_bard1",
