@@ -38,7 +38,7 @@ function GetNote(_x,_y,_note,_level){
     }
 }
 function GetMiniGame(_sheet,_level,_tempo){
-    with instance_create_layer(Camera.gui_w*.5,Camera.gui_h*.25,0,MiniGame){
+    with instance_create_layer(Camera.gui_w*.25,Camera.gui_h*.20,0,MiniGame){
         current_sheet=sheets[_sheet];
         level=_level;
         tempo=_tempo;

@@ -49,3 +49,5 @@ lists=[start_sequence,credits_sequence,exit_sequence];
 original_lists=[start_sequence_original,credits_sequence_original,exit_sequence_original];
 active_list=undefined;
 init_notes();
+arrow_keys=[kb_up,kb_left,kb_down,kb_right];
+wasd_keys=[kb_w,kb_a,kb_s,kb_d];

@@ -5,10 +5,10 @@ fail_treshold=x-40;
 current_key=noone;
 key_position_x=x+128;
 key_position_y=[
-y-36*GUISCALE,
-y-12*GUISCALE,
-y+12*GUISCALE,
-y+36*GUISCALE,
+y-24*GUISCALE,
+y-8*GUISCALE,
+y+8*GUISCALE,
+y+24*GUISCALE,
 ];
 scr=0;
 //--------------------------------------------------\\
@@ -25,9 +25,19 @@ function state_normal(){
     draw_state=0;
     if timer%tempo==0{
         //GetNote(key_position_x,key_position_y[irandom(3)],ds_queue_dequeue(current_sheet),level);
-        GetNote(key_position_x,key_position_y[irandom(3)],
-        choose(noteUp,noteLeft,noteDown,noteRight,sustainUp,sustainLeft,sustainDown,sustainRight),
-        level);
+        var _note=choose(noteUp,noteLeft,noteDown,noteRight,sustainUp,sustainLeft,sustainDown,sustainRight);
+        switch _note{
+            case noteUp:case sustainUp:
+            var _y=key_position_y[0];
+            break;case noteLeft:case sustainLeft:
+            var _y=key_position_y[3];
+            break;case noteDown:case sustainDown:
+            var _y=key_position_y[1];
+            break;case noteRight:case sustainRight:
+            var _y=key_position_y[2];
+            break;
+        }
+        GetNote(key_position_x,_y,_note,level);
     }
     DebugAddGuiMessage("timer: "+str(timer));
     timer++;

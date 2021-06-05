@@ -22,6 +22,10 @@ globalvar KEY;KEY={
     mcl:false,
     mpl:false,
     mrl:false,
+    up:false,
+    left:false,
+    down:false,
+    right:false,
 }
 function DebugAddGuiMessage(_msg){
     ArrayAdd(GameController.debug_text,_msg);

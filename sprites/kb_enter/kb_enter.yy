@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Bad Bard Good Killer",
-    "path": "Bad Bard Good Killer.yyp",
+    "name": "Keys",
+    "path": "folders/Keys.yy",
   },
   "resourceVersion": "1.0",
   "name": "kb_enter",

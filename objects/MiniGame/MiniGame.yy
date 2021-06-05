@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "unknown",
-    "path": "sprites/unknown/unknown.yy",
+    "name": "spr_music_sheet",
+    "path": "sprites/spr_music_sheet/spr_music_sheet.yy",
   },
   "solid": false,
   "visible": true,
