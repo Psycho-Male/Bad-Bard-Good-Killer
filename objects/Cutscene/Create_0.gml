@@ -3,8 +3,18 @@ current_sequence=undefined;
 current_bard=noone;
 step=0;
 sequence_alpha=1;
-sequence1_text=saveSection+" was a passionate, but talentless bard. All he wanted was peoples attention, love and money. Tonight "+playerName+" will play in a famous tavern with known musicians, 'I can finally show my true potential!', thought "+playerName+"...";
+opening_text=saveSection+" was a passionate, but talentless bard. All she wanted was peoples attention, love and money. Tonight "+playerName+" will play in a famous tavern with known musicians, 'I can finally show my true potential!', thought "+playerName+"...";
+ending_text1=playerName+" laughed as she bathed in crowds cheering and applause, this was her victory song, this the proof that Music's has finally acknowledged her! She could her the Music talking to her, praising her!";
+ending_text2=playerName+" finally did it! There is no one like her and no one cheers anyone other then her! Only she have money! Only she have fame! Only she have love! She have everything, she is the only real musician in this world!";
+ending_text3="Thanks for playing!";
+preAssasination1_text=" Tsch, they are good.. but not enough. They might be talented musicians, but they are lacking in passion. They are here just for fame and money, they don't understand the Music. To become a real musician, I must go beyond expectations, I must conquer my fears and doubts and do what I really need to do.";
+preAssasination2_text1="'This is easier then I thought', said "+playerName+" to herself, her fears and doubts started to clear, she had only one goal in mind. ";
+preAssasination2_text2=playerName+": Killing one musician didn't change crowds cheering, which means there is a still a musician better then me. But that's okay, only I'm capable of going through such lengths for the sake of my art! This much is nothing for me!";
+preAssasination3_text1="After their performance ended, "+playerName+" didn't wait even for a moment, she knew this was needed, she felts this even before their last performance. How could she be so stupid, her only enemy was obvious from the start!";
+preAssasination3_text2="She felt stupid and embarrassed as she went into backstage, she shrugged 'Mistakes always happen and I'm not the one to get scared over small mistakes like this', she thought to herself.";
 assasination1_text=playerName+" is now one step closer to being acknowledged bard in town. No one would ever take the risk "+playerName+" took, no one is passionate about this as much as "+playerName+", they don't deserve no fame, love nor money. This is real art, she's deserves everything...";
+assasination2_text="assasination2_text";
+assasination3_text="assasination3_text";
 function timeout(_step){
     if timer>=0{
         timer-=1/60;
@@ -33,8 +43,10 @@ textbox={
                 print=_text;
             }
             return false;
+        }else if kp_anykey{
+            print="";
+            return true;
         }
-        return true;
     },
     draw:function(_text){
         DrawSetAlignColor(fa_left,fa_top,c_white,1);
@@ -44,30 +56,6 @@ textbox={
     },
 }
 textbox.init();
-function sequence_opening(){
-    switch step{
-        case 0:
-        DrawFade(sequence_alpha);
-        DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
-        if textbox.draw(sequence1_text){
-            if kp_anykey{step++;}
-        }
-        break;case 1:
-        if sequence_alpha>0{
-            DrawFade(sequence_alpha);
-            DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
-            sequence_alpha-=alphaSpeed;
-        }else{
-            step++;
-        }
-        break;case 2:
-        current_sequence=undefined;
-        GetMiniGame(0,1,60);
-        GAMESTATE++;
-        Destroy();
-        break;
-    }
-}
 function draw_bards(_arr,_alpha,_selection){
     var _len=array_length(_arr)+1;
     var _gap=Camera.gui_w/_len;
@@ -81,6 +69,80 @@ function draw_bards(_arr,_alpha,_selection){
             draw_name(_pos[0],_pos[1]+12*GUISCALE);
             draw_cost(_pos[0],_pos[1]+22*GUISCALE);
         }
+    }
+}
+function sequence_opening(){
+    switch step{
+        case 0:
+        DrawFade(sequence_alpha);
+        DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+        if textbox.draw(opening_text){step++;}
+        break;case 1:
+        if sequence_alpha>0{
+            DrawFade(sequence_alpha);
+            DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+            sequence_alpha-=alphaSpeed;
+        }else{
+            step++;
+        }
+        break;case 2:
+        current_sequence=undefined;
+        Gamestep();
+        Destroy();
+        break;
+    }
+}
+function sequence_ending(){
+    switch step{
+        case 0:
+        if textbox.draw(ending_text1){step++;}
+        break;case 1:
+        if textbox.draw(ending_text2){step++;}
+        break;case 2:
+        if textbox.draw(ending_text3){step++;}
+        break;case 3:
+        game_end();
+        break;
+    }
+}
+function sequence_preAssasination1(){
+    DrawFade(sequence_alpha);
+    DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+    switch step{
+        case 0:
+        if textbox.draw(preAssasination1_text){step++;}
+        break;case 1:
+        current_sequence=sequence_choose_target;
+        step=0;
+        break;
+    }
+}
+function sequence_preAssasination2(){
+    DrawFade(sequence_alpha);
+    DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+    switch step{
+        case 0:
+        if textbox.draw(preAssasination2_text1){step++;}
+        break;case 1:
+        if textbox.draw(preAssasination2_text2){step++;}
+        break;case 2:
+        current_sequence=sequence_choose_target;
+        step=0;
+        break;
+    }
+}
+function sequence_preAssasination3(){
+    DrawFade(sequence_alpha);
+    DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+    switch step{
+        case 0:
+        if textbox.draw(preAssasination3_text1){step++;}
+        break;case 1:
+        if textbox.draw(preAssasination3_text2){step++;}
+        break;case 2:
+        current_sequence=sequence_choose_target;
+        step=0;
+        break;
     }
 }
 function sequence_choose_target(){
@@ -177,7 +239,7 @@ function sequence_assasination(){
         }
         break;case 3:
         if timeout(true){
-            timer=5;
+            timer=2;
             with obj_player{
                 SfxPlay(sfx_sword1);
                 sprite_index=sprite_attack;
@@ -199,8 +261,15 @@ function sequence_assasination(){
         DrawFade(sequence_alpha);
         DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
         audio_sound_gain(sfx_sword1,1,0);
-        if textbox.draw(assasination1_text){
-            if kp_anykey{step++;}
+        switch GAMESTATE{
+            case stateFirstSong:
+            if textbox.draw(assasination1_text){step++;}
+            break;case stateSecondSong:
+            if textbox.draw(assasination2_text){step++;}
+            break;case stateThirdSong:
+            //if textbox.draw(assasination3_text){step++;}
+            step++;
+            break;
         }
         break;case 7:
         DrawFade(sequence_alpha);
@@ -210,9 +279,8 @@ function sequence_assasination(){
             Destroy(current_bard);
             room_goto(rm_stage1);
             with par_bard{visible=true;}
-            GAMESTATE++;
+            Gamestep();
             Destroy();
-            GetMiniGame(0,1,60);
         //}
         break;
     }

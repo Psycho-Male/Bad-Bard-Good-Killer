@@ -1,11 +1,15 @@
-#macro noteUp       kb_up
-#macro noteLeft     kb_left
-#macro noteDown     kb_down
-#macro noteRight    kb_right
-#macro sustainUp    kb_susUp
-#macro sustainLeft  kb_susLeft
-#macro sustainDown  kb_susDown
-#macro sustainRight kb_susRight
+#macro noteUp           kb_up
+#macro noteLeft         kb_left
+#macro noteDown         kb_down
+#macro noteRight        kb_right
+#macro sustainUp        kb_susUp
+#macro sustainLeft      kb_susLeft
+#macro sustainDown      kb_susDown
+#macro sustainRight     kb_susRight
+#macro keycodeUp        0
+#macro keycodeLeft      1
+#macro keycodeDown      2
+#macro keycodeRight     3
 function GetNote(_x,_y,_note,_level){
     if IsUndefined(_note){exit;}
     with instance_create_depth(_x,_y,depth-1-instance_number(MusicNote),MusicNote){

@@ -8,3 +8,10 @@ if !audio_group_is_loaded(aug_bgm){
 }
 fade_out_list=ds_list_create();
 fade_in_list=ds_list_create();
+gamestate_checked=false;
+key_list=[
+vk_w,vk_up,
+vk_a,vk_left,
+vk_s,vk_down,
+vk_d,vk_right,
+];

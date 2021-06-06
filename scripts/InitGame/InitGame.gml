@@ -10,14 +10,15 @@ globalvar GUISCALE;GUISCALE=3;
 globalvar DIFFICULTY;DIFFICULTY=1;
 #macro stateOpening         0
 #macro stateFirstSong       1
-#macro stateFirstKill       2
-#macro stateSecondSong      3
-#macro stateSecondKill      4
-#macro stateThirdSong       5
-#macro stateThirdKill       6
-#macro stateEnding          7
-#macro stateChooseTarget    8
-#macro stateAssasination    9
+#macro stateSecondSong      2
+#macro stateThirdSong       3
+#macro stateEnding          4
+//These are different
+#macro statePreAssasination1    5
+#macro statePreAssasination2    6
+#macro statePreAssasination3    7
+#macro stateChooseTarget        8
+#macro stateAssasination        9
 globalvar GAMESTATE;GAMESTATE=stateOpening;
 globalvar DEVLOGING;DEVLOGIN=parameter_count==3;
 globalvar MOUSE_ACTIVE;MOUSE_ACTIVE=false;
@@ -110,4 +111,8 @@ function MoveTo(_idMove,_targetCode,_offX,_offY){
         _idMove.x=x+_offX;
         _idMove.y=y+_offY;
     }
+}
+function Gamestep(){
+    GAMESTATE++;
+    GameController.gamestate_checked=false;
 }

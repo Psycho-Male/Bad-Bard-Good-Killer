@@ -10,16 +10,22 @@ if IsDefined(goto){
 if kp_tab{
     DEBUG.enabled=!DEBUG.enabled;
 }
-if room==rm_stage1{
+if !gamestate_checked&&room==rm_stage1{
+    gamestate_checked=true;
     switch GAMESTATE{
         case stateOpening:
         if !Exists(Cutscene){
-            //GetCutscene(stateOpening);
-            GetCutscene(stateChooseTarget);
+            GetCutscene(stateOpening);
+            //GetCutscene(stateChooseTarget);
         }
-        break;case stateFirstKill:
-        break;case stateSecondKill:
-        break;case stateThirdKill:
+        break;case stateFirstSong:
+        GetMiniGame(0,1,60);
+        break;case stateSecondSong:
+        GetMiniGame(0,1,60);
+        break;case stateThirdSong:
+        GetMiniGame(0,1,60);
+        break;case stateEnding:
+        if !Exists(Cutscene){GetCutscene(stateEnding);}
         break;
     }
 }

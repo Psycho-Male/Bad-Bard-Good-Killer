@@ -22,6 +22,8 @@ function state_normal(){
     if kp_o{
         Destroy(MusicNote);
         ds_queue_clear(current_sheet);
+        music_started=true;
+        music_ended=true;
         scr+=1000;
     }
     if !music_started{
@@ -37,7 +39,9 @@ function state_normal(){
     if timer%tempo==0{
         //GetNote(Camera.gui_w*.75,key_position_y[irandom(3)],ds_queue_dequeue(current_sheet),level);
         //var _note=ds_queue_dequeue(current_sheet);
-        music_ended=audio_sound_get_track_position(current_music)>audio_sound_length(current_music)-8;
+        if !music_ended{
+            music_ended=audio_sound_get_track_position(current_music)>audio_sound_length(current_music)-8;
+        }
         var _note=undefined;
         if !music_ended{
             _note=choose(noteUp,noteDown,noteLeft,noteRight,sustainUp,sustainDown,sustainLeft,sustainRight);
@@ -87,7 +91,17 @@ function state_end(){
         scr-=min(_amount,scr);
         draw_state=1;
     }else if kp_anykey{
-        GetCutscene(stateChooseTarget);
+        switch GAMESTATE{
+            case stateFirstSong:
+            GetCutscene(statePreAssasination1);
+            break;case stateSecondSong:
+            GetCutscene(statePreAssasination2);
+            break;case stateThirdSong:
+            GetCutscene(statePreAssasination3);
+            break;case stateFourthSong:
+            GetCutscene(stateEnding);
+            break;
+        }
         DIFFICULTY++;
         Destroy();
     }

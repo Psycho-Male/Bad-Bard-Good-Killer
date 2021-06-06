@@ -34,7 +34,7 @@ function success(){
     }
     Trace("_percentage: "+str(_percentage));
     MiniGame.scr+=(level*10+sustain*5)*_percentage;
-    MONEY+=level*100;
+    MONEY+=(level)*_percentage;
     GetMoney(id,level*100,5);
     Destroy();
     //state_current=state_success;
@@ -77,7 +77,7 @@ function state_fail(){
 }
 function state_sustain(){
     if sustain_pressed{
-        if keyboard_check_released(key){
+        if IsDefined(KEY.released)&&KEY.released==key{
             sustain_pressed=false;
             success();
         }
