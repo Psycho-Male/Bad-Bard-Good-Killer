@@ -94,6 +94,7 @@
     {"id":{"name":"spr_bard3_play","path":"sprites/spr_bard3_play/spr_bard3_play.yy",},"order":8,},
     {"id":{"name":"kb_susDown","path":"sprites/kb_susDown/kb_susDown.yy",},"order":17,},
     {"id":{"name":"obj_main_menu","path":"objects/obj_main_menu/obj_main_menu.yy",},"order":21,},
+    {"id":{"name":"Stage_track_one_finished_jam","path":"sounds/Stage_track_one_finished_jam/Stage_track_one_finished_jam.yy",},"order":3,},
     {"id":{"name":"DrawFunctions","path":"scripts/DrawFunctions/DrawFunctions.yy",},"order":8,},
     {"id":{"name":"spr_bard2_idle","path":"sprites/spr_bard2_idle/spr_bard2_idle.yy",},"order":6,},
     {"id":{"name":"CharacterFunctions","path":"scripts/CharacterFunctions/CharacterFunctions.yy",},"order":3,},
