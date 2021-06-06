@@ -94,7 +94,10 @@ function sequence_choose_target(){
         }
         break;case 2:
         DrawFade(sequence_alpha);
-        bard_selection=ClampCycle(bard_selection+inpHorizontal,array_length(bards));
+        if inpHorizontal!=0{
+            bard_selection=ClampCycle(bard_selection+inpHorizontal,array_length(bards));
+            SfxPlay(sfx_bard_choice_change1);
+        }
         draw_bards(bards,sequence_alpha,bard_selection);
         current_bard=bards[bard_selection];
         var _name=current_bard.name;
@@ -106,6 +109,7 @@ function sequence_choose_target(){
         if kp_escape{
             //step++;
         }else if kp_enter&&MONEY>=current_bard.cost{
+            SfxPlay(sfx_bard_choose1);
             MONEY-=current_bard.cost;
             with par_bard{
                 visible=false;
@@ -125,7 +129,6 @@ function sequence_choose_target(){
 function sequence_assasination(){
     switch step{
         case 0:
-        timer=1;
         DrawFade(sequence_alpha);
         MoveTo(current_bard,"target");
         MoveTo(obj_player,"killer1");
@@ -140,14 +143,18 @@ function sequence_assasination(){
             image_yscale=GUISCALE+1;
         }
         sequence_alpha-=alphaSpeed;
-        //if sequence_alpha<=0{
-        if kp_anykey{
-            GetSpeechbox(current_bard,"Ew, it's "+playerName+", shoo, shoo!!");
-            step++;
+        if sequence_alpha<=0{
             timer=.5;
-            sequence_alpha=1;
+            step++;
         }
         break;case 1:
+        if kp_anykey{
+            timer=.5;
+            sequence_alpha=1;
+            GetSpeechbox(current_bard,"Ew, it's "+playerName+", shoo, shoo!!");
+            step++;
+        }
+        break;case 2:
         timer-=1/60;
         DrawFade(sequence_alpha);
         //if timer<=0{
@@ -160,7 +167,7 @@ function sequence_assasination(){
             }
             step++;
         }
-        break;case 2:
+        break;case 3:
         timer-=1/60;
         //if timer<0{
         if kp_anykey{
@@ -173,26 +180,26 @@ function sequence_assasination(){
             }
             sequence_alpha=0;
         }
-        break;case 3:
+        break;case 4:
         timer-=1/60;
         //if timer<=0{
         if kp_anykey{
             step++;
         }
-        break;case 4:
+        break;case 5:
         DrawFade(sequence_alpha);
         sequence_alpha+=alphaSpeed;
         //if sequence_alpha>=1{
         if kp_anykey{
             step++;
         }
-        break;case 5:
+        break;case 6:
         DrawFade(sequence_alpha);
         DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
         if textbox.draw(assasination1_text){
             if kp_anykey{step++;}
         }
-        break;case 6:
+        break;case 7:
         DrawFade(sequence_alpha);
         BgmStop(bgm_tension);
         //GameController.goto=rm_stage1;

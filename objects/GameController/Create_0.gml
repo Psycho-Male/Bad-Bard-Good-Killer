@@ -6,3 +6,5 @@ if !audio_group_is_loaded(sfx_low){
 if !audio_group_is_loaded(aug_bgm){
     audio_group_load(aug_bgm);
 }
+fade_out_list=ds_list_create();
+fade_in_list=ds_list_create();

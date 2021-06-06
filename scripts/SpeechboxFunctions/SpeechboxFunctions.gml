@@ -12,6 +12,7 @@ function GetSpeechbox(_id,_text){
     }
 }
 function PositiveCheer(){
+    SfxPlay(sfx_cheering1);
     var n=irandom(instance_number(obj_point)-1);
     var _chatList=[
     "Nice1",
@@ -22,6 +23,7 @@ function PositiveCheer(){
     GetSpeechbox(Find(obj_point,n),ArrayChoose(_chatList));
 }
 function NegativeCheer(){
+    SfxPlay(sfx_booing1);
     var n=irandom(instance_number(obj_point)-1);
     var _chatList=[
     "Bad1",

@@ -37,3 +37,22 @@ if room=rm_main_menu{
 if kp_t{
     MONEY+=1000;
 }
+for(var i=0;i<ds_list_size(fade_out_list);i++){
+    var _audio=fade_out_list[|i];
+    var _currentGain=audio_sound_get_gain(_audio);
+    if _currentGain==1{
+        audio_sound_gain(_audio,0,2400);
+    }else if _currentGain==0{
+        audio_stop_sound(_audio);
+        ds_list_delete(fade_out_list,i);
+    }
+}
+for(var i=0;i<ds_list_size(fade_in_list);i++){
+    var _audio=fade_in_list[|i];
+    var _currentGain=audio_sound_get_gain(_audio);
+    if _currentGain==0{
+        audio_sound_gain(_audio,1,2400);
+    }else if _currentGain==0{
+        ds_list_delete(fade_in_list,i);
+    }
+}

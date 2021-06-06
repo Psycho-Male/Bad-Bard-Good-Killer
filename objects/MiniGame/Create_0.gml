@@ -12,6 +12,9 @@ y+24*GUISCALE,
 scr=0;
 correct_count=0;
 wrong_count=0;
+music_started=false;
+music_ended=false;
+last_note=undefined;
 //--------------------------------------------------\\
 //States||
 function state_normal(){
@@ -21,9 +24,30 @@ function state_normal(){
         ds_queue_clear(current_sheet);
         scr+=1000;
     }
+    if !music_started{
+        with MusicNote if x<Camera.gui_w*.5{
+            other.music_started=true;
+            other.current_music=BgmPlay(bgm_theme1,false);
+            break;
+        }
+    }else{
+        var _trackPos=audio_sound_get_track_position(current_music);
+        DebugAddGuiMessage("_trackPos: "+str(_trackPos));
+    }
     if timer%tempo==0{
         //GetNote(Camera.gui_w*.75,key_position_y[irandom(3)],ds_queue_dequeue(current_sheet),level);
-        var _note=ds_queue_dequeue(current_sheet);
+        //var _note=ds_queue_dequeue(current_sheet);
+        music_ended=audio_sound_get_track_position(current_music)>audio_sound_length(current_music)-8;
+        var _note=undefined;
+        if !music_ended{
+            _note=choose(noteUp,noteDown,noteLeft,noteRight,sustainUp,sustainDown,sustainLeft,sustainRight);
+            if IsDefined(last_note){
+                while _note==last_note{
+                _note=choose(noteUp,noteDown,noteLeft,noteRight,sustainUp,sustainDown,sustainLeft,sustainRight);
+                }
+            }
+            last_note=_note;
+        }
         if IsDefined(_note){
             switch _note{
                 case noteUp:case sustainUp:
@@ -37,7 +61,7 @@ function state_normal(){
                 break;
             }
             GetNote(Camera.gui_w*.75,_y,_note,level);
-        }else if !Exists(MusicNote){
+        }else if !Exists(MusicNote)&&music_ended{
             with par_bard{
                 sprite_index=sprite_idle;
             }
@@ -59,6 +83,7 @@ function state_end(){
         }else if scr>10{
             _amount=10;
         }
+        SfxPlay([sfx_point1,sfx_point2]);
         SCORE+=min(_amount,scr);
         scr-=min(_amount,scr);
         draw_state=1;
@@ -76,6 +101,7 @@ draw_state=0;
 sheet1_original=ds_queue_create();
 sheet1=ds_queue_create();
 sheets=[sheet1];
+musics=[bgm_theme1];
 ds_queue_enqueue(sheet1_original,
 noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,
 noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,

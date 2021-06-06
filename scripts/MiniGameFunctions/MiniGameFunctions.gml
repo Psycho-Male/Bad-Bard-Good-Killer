@@ -8,7 +8,7 @@
 #macro sustainRight kb_susRight
 function GetNote(_x,_y,_note,_level){
     if IsUndefined(_note){exit;}
-    with instance_create_depth(_x,_y,depth-1,MusicNote){
+    with instance_create_depth(_x,_y,depth-1-instance_number(MusicNote),MusicNote){
         sprite_index=_note;
         level=_level;
         switch sprite_index{
@@ -43,6 +43,7 @@ function GetMiniGame(_sheet,_level,_tempo){
     }
     with instance_create_layer(Camera.gui_w*.25,Camera.gui_h*.20,0,MiniGame){
         current_sheet=sheets[_sheet];
+        current_music=musics[_sheet];
         level=_level;
         tempo=_tempo;
         return id;
