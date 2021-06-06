@@ -74,12 +74,10 @@ function draw_bards(_arr,_alpha,_selection){
 function sequence_opening(){
     switch step{
         case 0:
-        DrawFade(sequence_alpha);
         DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
         if textbox.draw(opening_text){step++;}
         break;case 1:
         if sequence_alpha>0{
-            DrawFade(sequence_alpha);
             DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
             sequence_alpha-=alphaSpeed;
         }else{
@@ -93,6 +91,7 @@ function sequence_opening(){
     }
 }
 function sequence_ending(){
+    sequence_alpha=0;
     switch step{
         case 0:
         if textbox.draw(ending_text1){step++;}
@@ -101,12 +100,12 @@ function sequence_ending(){
         break;case 2:
         if textbox.draw(ending_text3){step++;}
         break;case 3:
-        game_end();
+        step=0;
+        current_sequence=credits;
         break;
     }
 }
 function sequence_preAssasination1(){
-    DrawFade(sequence_alpha);
     DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
     switch step{
         case 0:
@@ -118,7 +117,6 @@ function sequence_preAssasination1(){
     }
 }
 function sequence_preAssasination2(){
-    DrawFade(sequence_alpha);
     DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
     switch step{
         case 0:
@@ -132,7 +130,6 @@ function sequence_preAssasination2(){
     }
 }
 function sequence_preAssasination3(){
-    DrawFade(sequence_alpha);
     DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
     switch step{
         case 0:
@@ -157,7 +154,6 @@ function sequence_choose_target(){
         step++;
         BgmPlay(bgm_tension);
         break;case 1:
-        DrawFade(sequence_alpha);
         if sequence_alpha<1{
             sequence_alpha+=alphaSpeed;
             draw_bards(bards,sequence_alpha);
@@ -165,7 +161,6 @@ function sequence_choose_target(){
             step++;
         }
         break;case 2:
-        DrawFade(sequence_alpha);
         if inpHorizontal!=0{
             bard_selection=ClampCycle(bard_selection+inpHorizontal,array_length(bards));
             SfxPlay(sfx_bard_choice_change1);
@@ -174,7 +169,8 @@ function sequence_choose_target(){
         current_bard=bards[bard_selection];
         var _name=current_bard.name;
         var _cost=current_bard.cost;
-        var _text="Assasinate "+_name+" for "+str(_cost)+"?";
+        var _text="Assasinate "+_name+" for "+str(_cost)+"?\n";
+        _text+="You have: "+str(round(MONEY));
         DrawSetAlignColor(fa_middle,fa_center,c_white,1);
         draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.2,_text,GUISCALE,GUISCALE,0);
         draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.8,"Press ESC to skip.",GUISCALE,GUISCALE,0);
@@ -201,7 +197,6 @@ function sequence_choose_target(){
 function sequence_assasination(){
     switch step{
         case 0:
-        DrawFade(sequence_alpha);
         MoveTo(current_bard,"target");
         MoveTo(obj_player,"killer1");
         with current_bard{
@@ -226,7 +221,6 @@ function sequence_assasination(){
             sequence_alpha=1;
         }
         break;case 2:
-        DrawFade(sequence_alpha);
         if timeout(true){
             timer=1;
             MoveTo(obj_player,"killer2");
@@ -250,7 +244,6 @@ function sequence_assasination(){
         if timeout(true){
         }
         break;case 5:
-        DrawFade(sequence_alpha);
         sequence_alpha+=alphaSpeed;
         audio_sound_gain(sfx_sword1,1-sequence_alpha,0);
         if sequence_alpha>=1{
@@ -258,7 +251,6 @@ function sequence_assasination(){
             step++;
         }
         break;case 6:
-        DrawFade(sequence_alpha);
         DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
         audio_sound_gain(sfx_sword1,1,0);
         switch GAMESTATE{
@@ -272,7 +264,6 @@ function sequence_assasination(){
             break;
         }
         break;case 7:
-        DrawFade(sequence_alpha);
         BgmStop(bgm_tension);
         //GameController.goto=rm_stage1;
         //if room==rm_stage1{
@@ -283,5 +274,20 @@ function sequence_assasination(){
             Destroy();
         //}
         break;
+    }
+}
+function credits(){
+    sequence_alpha=1;
+    var _text="Coding/Story/Game Design\nAli Selim Agacan\n";
+    _text+="Pixel Art\nSecil Sengul\n";
+    _text+="Music\nKaan Salman\n";
+    _text+="\nPress ESC";
+    DrawSetAlignColor(fa_middle,fa_center,c_white,1);
+    draw_text_transformed(Camera.gui_w/2,Camera.gui_h/2,_text,GUISCALE,GUISCALE,0);
+    if kp_escape{
+        Destroy();
+        if GAMESTATE==stateEnding{
+            game_end();
+        }
     }
 }

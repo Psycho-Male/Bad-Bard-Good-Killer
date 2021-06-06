@@ -18,6 +18,8 @@ function GetCutscene(_sequence){
             current_sequence=sequence_preAssasination2;
             break;case statePreAssasination3:
             current_sequence=sequence_preAssasination3;
+            break;case stateCredits:
+            current_sequence=credits;
             break;
         }
     }

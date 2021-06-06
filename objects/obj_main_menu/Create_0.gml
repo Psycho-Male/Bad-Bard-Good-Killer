@@ -39,11 +39,10 @@ var _func=function(){
         image_yscale=GUISCALE;
     }
 }
-buttons=[
-GetButton(button_x,Camera.gui_h*.20,"Start Game",_func),
-GetButton(button_x,Camera.gui_h*.30,"Credits"),
-GetButton(button_x,Camera.gui_h*.40,"Exit"),
-];
+buttons[0]=GetButton(button_x,Camera.gui_h*.20,"Start Game",_func);
+_func=function(){GetCutscene(stateCredits);}
+buttons[1]=GetButton(button_x,Camera.gui_h*.30,"Credits",_func);
+buttons[2]=GetButton(button_x,Camera.gui_h*.40,"Exit",game_end);
 start_sequence_original=ds_list_create();
 start_sequence=ds_list_create();
 ds_list_add(start_sequence_original,noteUp,noteLeft,noteDown,noteRight);
