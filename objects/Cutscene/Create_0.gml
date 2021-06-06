@@ -3,18 +3,33 @@ current_sequence=undefined;
 current_bard=noone;
 step=0;
 sequence_alpha=1;
+if false{
+opening_text=saveSection+" tutkulu ama yeteneksiz bir musiztendi. Istedigi tek sey insanlarin ilgisi, sevgisi ve parasiydiç Bu gece"+playerName+" meshur muzisyenlerle calacakti, 'Sonunda yetenegimi gostere"+playerName+"...";
+ending_text1=playerName+" laughed as she bathed in crowds cheering and applause, this was her victory song, this the proof that Music's has finally acknowledged her! She could her the Music talking to her, praising her!";
+ending_text2=playerName+" finally did it! There is no one like her and no one cheers anyone other then her! Only she have money! Only she have fame! Only she have love! She have everything, she is the only real musician in this world!";
+ending_text3="Thanks for playing!";
+preAssasination1_text=" Tsch, they are good.. but not enough. They might be talented musicians, but they are lacking in passion. They are here just for fame and money, they don't understand the Music. To become a real musician, I must go beyond expectations, I must conquer my fears and doubts and do what I really need to do.";
+preAssasination2_text1="'This is easier then I thought', said "+playerName+" to herself, her fears and doubts started to clear, she had only one goal in mind. ";
+preAssasination2_text2=playerName+": Killing one musician didn't change crowds cheering, which means there is a still a musician better then me. But that's okay, only I'm capable of going through such lengths for the sake of my Music! This much is nothing for me!";
+preAssasination3_text1="After their performance ended, "+playerName+" didn't wait even for a moment, she knew this was needed, she felts this even before their last performance. How could she be so stupid, her only enemy was obvious from the start!";
+preAssasination3_text2="She felt stupid and embarrassed as she went into backstage, she shrugged 'Mistakes always happen and I'm not the one to get scared over small mistakes like this', she thought to herself.";
+assasination1_text=playerName+" is now one step closer to being acknowledged bard in town. No one would ever take the risk "+playerName+" took, no one is passionate about this as much as "+playerName+", they don't deserve no fame, love nor money. This is real Music, she's deserves everything...";
+assasination2_text=playerName+" felt like she was getting close to her dreams, she felt inspired and strong! Music can make you feel so many things that other things cannot! That's why she has to be one, she has to be best! And for that, she knew what she had to do...";
+assasination3_text="Everyhing is going smoothly for "+playerName+", maybe too smooth... Maybe that's because Music has finally accepted her, acknowledged her passion and will! But she can't stop now, there is always a next step we can take, we can always get better for things we do! We can never stop or we will fail..";
+}else{
 opening_text=saveSection+" was a passionate, but talentless bard. All she wanted was peoples attention, love and money. Tonight "+playerName+" will play in a famous tavern with known musicians, 'I can finally show my true potential!', thought "+playerName+"...";
 ending_text1=playerName+" laughed as she bathed in crowds cheering and applause, this was her victory song, this the proof that Music's has finally acknowledged her! She could her the Music talking to her, praising her!";
 ending_text2=playerName+" finally did it! There is no one like her and no one cheers anyone other then her! Only she have money! Only she have fame! Only she have love! She have everything, she is the only real musician in this world!";
 ending_text3="Thanks for playing!";
 preAssasination1_text=" Tsch, they are good.. but not enough. They might be talented musicians, but they are lacking in passion. They are here just for fame and money, they don't understand the Music. To become a real musician, I must go beyond expectations, I must conquer my fears and doubts and do what I really need to do.";
 preAssasination2_text1="'This is easier then I thought', said "+playerName+" to herself, her fears and doubts started to clear, she had only one goal in mind. ";
-preAssasination2_text2=playerName+": Killing one musician didn't change crowds cheering, which means there is a still a musician better then me. But that's okay, only I'm capable of going through such lengths for the sake of my art! This much is nothing for me!";
+preAssasination2_text2=playerName+": Killing one musician didn't change crowds cheering, which means there is a still a musician better then me. But that's okay, only I'm capable of going through such lengths for the sake of my Music! This much is nothing for me!";
 preAssasination3_text1="After their performance ended, "+playerName+" didn't wait even for a moment, she knew this was needed, she felts this even before their last performance. How could she be so stupid, her only enemy was obvious from the start!";
 preAssasination3_text2="She felt stupid and embarrassed as she went into backstage, she shrugged 'Mistakes always happen and I'm not the one to get scared over small mistakes like this', she thought to herself.";
-assasination1_text=playerName+" is now one step closer to being acknowledged bard in town. No one would ever take the risk "+playerName+" took, no one is passionate about this as much as "+playerName+", they don't deserve no fame, love nor money. This is real art, she's deserves everything...";
-assasination2_text="assasination2_text";
-assasination3_text="assasination3_text";
+assasination1_text=playerName+" is now one step closer to being acknowledged bard in town. No one would ever take the risk "+playerName+" took, no one is passionate about this as much as "+playerName+", they don't deserve no fame, love nor money. This is real Music, she's deserves everything...";
+assasination2_text=playerName+" felt like she was getting close to her dreams, she felt inspired and strong! Music can make you feel so many things that other things cannot! That's why she has to be one, she has to be best! And for that, she knew what she had to do...";
+assasination3_text="Everyhing is going smoothly for "+playerName+", maybe too smooth... Maybe that's because Music has finally accepted her, acknowledged her passion and will! But she can't stop now, there is always a next step we can take, we can always get better for things we do! We can never stop or we will fail..";
+}
 function timeout(_step){
     if timer>=0{
         timer-=1/60;
@@ -218,7 +233,15 @@ function sequence_assasination(){
         }
         sequence_alpha-=alphaSpeed;
         if sequence_alpha<=0{
-            GetSpeechbox(current_bard,"Ew, it's "+playerName+", shoo, shoo!!");
+            switch GAMESTATE{
+                case stateFirstSong:
+                GetSpeechbox(current_bard,"What happened "+playerName+", did you drop you TALENT and FAME here?");
+                break;case stateSecondSong:
+                GetSpeechbox(current_bard,"Hey "+playerName+", one day I want to be a musician like you!");
+                break;case stateThirdSong:
+                GetSpeechbox(current_bard,"You were on fire back there "+playerName+"!");
+                break;
+            }
             timer=3;
             step++;
         }

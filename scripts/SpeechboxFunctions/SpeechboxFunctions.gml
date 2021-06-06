@@ -15,10 +15,10 @@ function PositiveCheer(){
     SfxPlay(sfx_cheering1);
     var n=irandom(instance_number(obj_point)-1);
     var _chatList=[
-    "Nice1",
-    "Nice2",
-    "Nice3",
-    "Nice4",
+    "More, more!!",
+    "Beautiful!",
+    "I love this song!",
+    "Keep it coming, ahahaha!",
     ];
     GetSpeechbox(Find(obj_point,n),ArrayChoose(_chatList));
 }
@@ -26,10 +26,10 @@ function NegativeCheer(){
     SfxPlay(sfx_booing1);
     var n=irandom(instance_number(obj_point)-1);
     var _chatList=[
-    "Bad1",
-    "Bad2",
-    "Bad3",
-    "Bad4",
+    "Boooo!",
+    "Where did you learn to play like that!!",
+    "Are you drunk!",
+    "You suck, booo!",
     ];
     GetSpeechbox(Find(obj_point,n),ArrayChoose(_chatList));
 }
