@@ -11,7 +11,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sfx_sword1.wav",
-  "duration": 2.435833,
+  "duration": 1.971667,
   "parent": {
     "name": "SFX",
     "path": "folders/SFX.yy",

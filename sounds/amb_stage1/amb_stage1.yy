@@ -7,8 +7,8 @@
   "type": 0,
   "bitDepth": 1,
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "aug_amb",
+    "path": "audiogroups/aug_amb",
   },
   "soundFile": "amb_stage1.ogg",
   "duration": 52.6538963,

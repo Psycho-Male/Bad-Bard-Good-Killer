@@ -30,6 +30,7 @@
     {"propertyId":{"name":"sprite_idle","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard2_idle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"sprite_play","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard2_play","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"position_code","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"2","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"sprite_death","path":"objects/par_bard/par_bard.yy",},"objectId":{"name":"par_bard","path":"objects/par_bard/par_bard.yy",},"value":"spr_bard2_death","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Bards",

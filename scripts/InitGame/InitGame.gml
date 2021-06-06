@@ -21,7 +21,7 @@ globalvar DIFFICULTY;DIFFICULTY=1;
 #macro stateAssasination        9
 #macro stateCredits             10
 globalvar GAMESTATE;GAMESTATE=stateOpening;
-globalvar DEVLOGING;DEVLOGIN=parameter_count==3;
+globalvar DEVLOGIN;DEVLOGIN=parameter_count()==3;
 globalvar MOUSE_ACTIVE;MOUSE_ACTIVE=false;
 globalvar KEY;KEY={
     confirm:false,

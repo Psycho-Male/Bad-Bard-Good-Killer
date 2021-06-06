@@ -21,9 +21,9 @@ if !gamestate_checked&&room==rm_stage1{
         break;case stateFirstSong:
         GetMiniGame(0,1,60);
         break;case stateSecondSong:
-        GetMiniGame(0,1,60);
+        GetMiniGame(1,2,60);
         break;case stateThirdSong:
-        GetMiniGame(0,1,60);
+        GetMiniGame(2,3,60);
         break;case stateEnding:
         if !Exists(Cutscene){GetCutscene(stateEnding);}
         break;
@@ -46,6 +46,11 @@ if kp_t{
 }
 for(var i=0;i<ds_list_size(fade_out_list);i++){
     var _audio=fade_out_list[|i];
+    if IsUndefined(_audio){
+        ds_list_delete(fade_out_list,i);
+        continue;
+    }
+    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio));
     var _currentGain=audio_sound_get_gain(_audio);
     if _currentGain==1{
         audio_sound_gain(_audio,0,2400);
@@ -56,6 +61,11 @@ for(var i=0;i<ds_list_size(fade_out_list);i++){
 }
 for(var i=0;i<ds_list_size(fade_in_list);i++){
     var _audio=fade_in_list[|i];
+    if IsUndefined(_audio){
+        ds_list_delete(fade_in_list,i);
+        continue;
+    }
+    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio));
     var _currentGain=audio_sound_get_gain(_audio);
     if _currentGain==0{
         audio_sound_gain(_audio,1,2400);

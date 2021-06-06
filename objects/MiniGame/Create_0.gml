@@ -27,9 +27,9 @@ function state_normal(){
         scr+=1000;
     }
     if !music_started{
-        with MusicNote if x<Camera.gui_w*.5{
+        with MusicNote if x<Camera.gui_w*.3{
             other.music_started=true;
-            other.current_music=BgmPlay(bgm_theme1,false);
+            other.current_music=BgmPlay(other.current_music,false);
             break;
         }
     }else{
@@ -113,8 +113,8 @@ draw_state=0;
 //Create Sheets||
 sheet1_original=ds_queue_create();
 sheet1=ds_queue_create();
-sheets=[sheet1];
-musics=[bgm_theme1];
+sheets=[sheet1,sheet1,sheet1];
+musics=[bgm_theme1,bgm_theme2,bgm_theme3];
 ds_queue_enqueue(sheet1_original,
 noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,
 noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,noteUp,noteDown,noteLeft,noteRight,

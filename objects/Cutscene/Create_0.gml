@@ -26,10 +26,14 @@ function timeout(_step){
 }
 textbox={
     init:function(){
-        sprite=spr_textbox;
         var _padding=16*GUISCALE;
+        if GAMESTATE==stateEnding{
+            pos_y=[0,Camera.gui_h*.4-_padding];
+        }else{
+            pos_y=[Camera.gui_h*.6,Camera.gui_h-_padding];
+        }
+        sprite=spr_textbox;
         pos_x=[0,Camera.gui_w-_padding];
-        pos_y=[Camera.gui_h*.6,Camera.gui_h-_padding];
         pos_inner_x=[pos_x[0]+_padding,pos_x[1]-_padding];
         pos_inner_y=[pos_y[0]+_padding,pos_y[1]-_padding];
         max_width=pos_inner_x[1]-pos_inner_x[0];
@@ -74,11 +78,11 @@ function draw_bards(_arr,_alpha,_selection){
 function sequence_opening(){
     switch step{
         case 0:
-        DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+        DrawSpriteExt(spr_port1,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
         if textbox.draw(opening_text){step++;}
         break;case 1:
         if sequence_alpha>0{
-            DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+            DrawSpriteExt(spr_port1,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
             sequence_alpha-=alphaSpeed;
         }else{
             step++;
@@ -92,6 +96,9 @@ function sequence_opening(){
 }
 function sequence_ending(){
     sequence_alpha=0;
+    if !audio_is_playing(sfx_cheering_long1){
+        SfxPlay(sfx_cheering_long1);
+    }
     switch step{
         case 0:
         if textbox.draw(ending_text1){step++;}
@@ -106,7 +113,7 @@ function sequence_ending(){
     }
 }
 function sequence_preAssasination1(){
-    DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+    DrawSpriteExt(spr_port1,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
     switch step{
         case 0:
         if textbox.draw(preAssasination1_text){step++;}
@@ -117,7 +124,7 @@ function sequence_preAssasination1(){
     }
 }
 function sequence_preAssasination2(){
-    DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+    DrawSpriteExt(spr_port1,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
     switch step{
         case 0:
         if textbox.draw(preAssasination2_text1){step++;}
@@ -130,7 +137,7 @@ function sequence_preAssasination2(){
     }
 }
 function sequence_preAssasination3(){
-    DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+    DrawSpriteExt(spr_port2,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
     switch step{
         case 0:
         if textbox.draw(preAssasination3_text1){step++;}
@@ -172,7 +179,7 @@ function sequence_choose_target(){
         var _text="Assasinate "+_name+" for "+str(_cost)+"?\n";
         _text+="You have: "+str(round(MONEY));
         DrawSetAlignColor(fa_middle,fa_center,c_white,1);
-        draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.2,_text,GUISCALE,GUISCALE,0);
+        draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.1,_text,GUISCALE,GUISCALE,0);
         draw_text_transformed(Camera.gui_w*.5,Camera.gui_h*.8,"Press ESC to skip.",GUISCALE,GUISCALE,0);
         if kp_escape{
             //step++;
@@ -235,9 +242,12 @@ function sequence_assasination(){
         if timeout(true){
             timer=2;
             with obj_player{
-                SfxPlay(sfx_sword1);
+                //SfxPlay(sfx_sword1);
                 sprite_index=sprite_attack;
                 image_speed=1;
+            }
+            with current_bard{
+                if sprite_exists(sprite_death){sprite_index=sprite_death;}
             }
         }
         break;case 4:
@@ -251,7 +261,7 @@ function sequence_assasination(){
             step++;
         }
         break;case 6:
-        DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+        DrawSpriteExt(spr_port1,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
         audio_sound_gain(sfx_sword1,1,0);
         switch GAMESTATE{
             case stateFirstSong:
