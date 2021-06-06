@@ -14,7 +14,8 @@ if room==rm_stage1{
     switch GAMESTATE{
         case stateOpening:
         if !Exists(Cutscene){
-            GetCutscene(stateOpening);
+            //GetCutscene(stateOpening);
+            GetCutscene(stateChooseTarget);
         }
         break;case stateFirstKill:
         break;case stateSecondKill:

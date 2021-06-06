@@ -8,6 +8,8 @@ function GetCutscene(_sequence){
             current_sequence=sequence_choose_target;
             break;case stateOpening:
             current_sequence=sequence_opening;
+            break;case stateAssasination:
+            current_sequence=sequence_assasination;
             break;
         }
     }

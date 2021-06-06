@@ -17,6 +17,7 @@ globalvar DIFFICULTY;DIFFICULTY=1;
 #macro stateThirdKill       6
 #macro stateEnding          7
 #macro stateChooseTarget    8
+#macro stateAssasination    9
 globalvar GAMESTATE;GAMESTATE=stateOpening;
 globalvar DEVLOGING;DEVLOGIN=parameter_count==3;
 globalvar MOUSE_ACTIVE;MOUSE_ACTIVE=false;

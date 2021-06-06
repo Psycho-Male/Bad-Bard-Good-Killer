@@ -1,9 +1,19 @@
+timer=0;
 current_sequence=undefined;
 current_bard=noone;
 step=0;
 sequence_alpha=1;
 sequence1_text=saveSection+" was a passionate, but talentless bard. All he wanted was peoples attention, love and money. Tonight "+playerName+" will play in a famous tavern with known musicians, 'I can finally show my true potential!', thought "+playerName+"...";
 assasination1_text=playerName+" is now one step closer to being acknowledged bard in town. No one would ever take the risk "+playerName+" took, no one is passionate about this as much as "+playerName+", they don't deserve no fame, love nor money. This is real art, she's deserves everything...";
+function timeout(_step){
+    if timer>=0{
+        timer-=1/60;
+        return false;
+    }else{
+        if _step{step++;}
+        return true;
+    }
+}
 textbox={
     init:function(){
         sprite=spr_textbox;
@@ -144,58 +154,51 @@ function sequence_assasination(){
         }
         sequence_alpha-=alphaSpeed;
         if sequence_alpha<=0{
-            timer=.5;
+            GetSpeechbox(current_bard,"Ew, it's "+playerName+", shoo, shoo!!");
+            timer=3;
             step++;
         }
         break;case 1:
-        if kp_anykey{
-            timer=.5;
+        if timeout(true){
+            timer=1;
             sequence_alpha=1;
-            GetSpeechbox(current_bard,"Ew, it's "+playerName+", shoo, shoo!!");
-            step++;
         }
         break;case 2:
-        timer-=1/60;
         DrawFade(sequence_alpha);
-        //if timer<=0{
-        if kp_anykey{
-            timer=.5;
+        if timeout(true){
+            timer=1;
             MoveTo(obj_player,"killer2");
             with obj_player{
                 sprite_index=sprite_attack;
                 image_speed=0;
             }
-            step++;
+            GetSpeechbox(current_bard,"HEEEEELP!!!");
+            sequence_alpha=0;
         }
         break;case 3:
-        timer-=1/60;
-        //if timer<0{
-        if kp_anykey{
-            timer=.15;
-            step++;
-            GetSpeechbox(current_bard,"HEEEEELP!!!");
+        if timeout(true){
+            timer=5;
             with obj_player{
+                SfxPlay(sfx_sword1);
                 sprite_index=sprite_attack;
                 image_speed=1;
             }
-            sequence_alpha=0;
         }
         break;case 4:
-        timer-=1/60;
-        //if timer<=0{
-        if kp_anykey{
-            step++;
+        if timeout(true){
         }
         break;case 5:
         DrawFade(sequence_alpha);
         sequence_alpha+=alphaSpeed;
-        //if sequence_alpha>=1{
-        if kp_anykey{
+        audio_sound_gain(sfx_sword1,1-sequence_alpha,0);
+        if sequence_alpha>=1{
+            obj_player.sprite_index=obj_player.sprite_idle;
             step++;
         }
         break;case 6:
         DrawFade(sequence_alpha);
         DrawSpriteExt(spr_bard4_idle,0,Camera.gui_w/2,Camera.gui_h/2,GUISCALE,0,undefined,sequence_alpha);
+        audio_sound_gain(sfx_sword1,1,0);
         if textbox.draw(assasination1_text){
             if kp_anykey{step++;}
         }

@@ -68,7 +68,6 @@ function state_normal(){
             state_current=state_end;
         }
     }
-    DebugAddGuiMessage("timer: "+str(timer));
     timer++;
 }
 function state_end(){
