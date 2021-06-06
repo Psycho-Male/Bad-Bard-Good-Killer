@@ -40,7 +40,7 @@ function state_normal(){
         //GetNote(Camera.gui_w*.75,key_position_y[irandom(3)],ds_queue_dequeue(current_sheet),level);
         //var _note=ds_queue_dequeue(current_sheet);
         if !music_ended{
-            music_ended=audio_sound_get_track_position(current_music)>audio_sound_length(current_music)-8;
+            music_ended=audio_sound_get_track_position(current_music)>audio_sound_length(current_music)-6;
         }
         var _note=undefined;
         if !music_ended{
