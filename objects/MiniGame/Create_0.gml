@@ -34,7 +34,7 @@ function state_normal(){
         }
     }else{
         var _trackPos=audio_sound_get_track_position(current_music);
-        DebugAddGuiMessage("_trackPos: "+str(_trackPos));
+        //DebugAddGuiMessage("_trackPos: "+str(_trackPos));
     }
     if timer%tempo==0{
         //GetNote(Camera.gui_w*.75,key_position_y[irandom(3)],ds_queue_dequeue(current_sheet),level);
@@ -86,7 +86,7 @@ function state_end(){
         }else if scr>10{
             _amount=10;
         }
-        SfxPlay([sfx_point1,sfx_point2]);
+        //SfxPlay([sfx_point1,sfx_point2]);
         SCORE+=min(_amount,scr);
         scr-=min(_amount,scr);
         draw_state=1;

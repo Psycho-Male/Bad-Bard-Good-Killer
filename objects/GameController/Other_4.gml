@@ -12,7 +12,9 @@ if room!=rm_main_menu{
     CreateDepth(obj_main_menu);
 }
 if room==rm_stage1{
+    BgmStop(bgm_tension);
     AmbPlay(amb_stage1);
 }else if room==rm_backstage1{
+    BgmPlay(bgm_tension,true);
     AmbPlay(amb_backstage1);
 }

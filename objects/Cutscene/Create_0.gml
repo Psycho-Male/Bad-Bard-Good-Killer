@@ -4,7 +4,7 @@ current_bard=noone;
 step=0;
 sequence_alpha=1;
 if false{
-opening_text=saveSection+" tutkulu ama yeteneksiz bir musiztendi. Istedigi tek sey insanlarin ilgisi, sevgisi ve parasiydiç Bu gece"+playerName+" meshur muzisyenlerle calacakti, 'Sonunda yetenegimi gostere"+playerName+"...";
+opening_text=saveSection+" tutkulu ama yeteneksiz bir musiztendi. Istedigi tek sey insanlarin ilgisi, sevgisi ve parasiydiï¿½ Bu gece"+playerName+" meshur muzisyenlerle calacakti, 'Sonunda yetenegimi gostere"+playerName+"...";
 ending_text1=playerName+" laughed as she bathed in crowds cheering and applause, this was her victory song, this the proof that Music's has finally acknowledged her! She could her the Music talking to her, praising her!";
 ending_text2=playerName+" finally did it! There is no one like her and no one cheers anyone other then her! Only she have money! Only she have fame! Only she have love! She have everything, she is the only real musician in this world!";
 ending_text3="Thanks for playing!";
@@ -127,6 +127,19 @@ function sequence_ending(){
         break;
     }
 }
+function credits(){
+    if GAMESTATE==stateEnding{
+        game_end();
+    }else{
+        sequence_alpha=1;
+        var _text="Coding/Story/Game Design\nPsycho-Male\n";
+        _text+="Pixel Art\nShySeel\n";
+        _text+="Music\nKaan Salman\n";
+        _text+="\nPress ESC";
+        DrawSetAlignColor(fa_middle,fa_center,c_white,1);
+        draw_text_transformed(Camera.gui_w/2,Camera.gui_h/2,_text,GUISCALE,GUISCALE,0);
+    }
+}
 function sequence_preAssasination1(){
     DrawSpriteExt(spr_port1,0,Camera.gui_w/2,Camera.gui_h*.65,GUISCALE,0,undefined,sequence_alpha);
     switch step{
@@ -174,7 +187,6 @@ function sequence_choose_target(){
         }
         sequence_alpha=0;
         step++;
-        BgmPlay(bgm_tension);
         break;case 1:
         if sequence_alpha<1{
             sequence_alpha+=alphaSpeed;
@@ -297,7 +309,6 @@ function sequence_assasination(){
             break;
         }
         break;case 7:
-        BgmStop(bgm_tension);
         //GameController.goto=rm_stage1;
         //if room==rm_stage1{
             Destroy(current_bard);
@@ -309,18 +320,54 @@ function sequence_assasination(){
         break;
     }
 }
-function credits(){
-    sequence_alpha=1;
-    var _text="Coding/Story/Game Design\nAli Selim Agacan\n";
-    _text+="Pixel Art\nSecil Sengul\n";
-    _text+="Music\nKaan Salman\n";
-    _text+="\nPress ESC";
-    DrawSetAlignColor(fa_middle,fa_center,c_white,1);
-    draw_text_transformed(Camera.gui_w/2,Camera.gui_h/2,_text,GUISCALE,GUISCALE,0);
-    if kp_escape{
-        Destroy();
-        if GAMESTATE==stateEnding{
-            game_end();
+switch GAMESTATE{
+    case stateFirstSong:
+    text_preSex="You stupid bard, if you can't make money by using that lute, then you should make money by using your ass!";
+    break;case stateSecondSong:
+    text_preSex="preSex2";
+    break;case stateThirdSong:
+    text_preSex="preSex3";
+    break;
+}
+function sequence_sex(){
+    switch step{
+        case 0:
+        sequence_alpha=1;
+        GameController.goto=rm_backstage1;
+        with par_bard{
+            if object_index!=obj_player{visible=false;}
         }
+        step++;
+        break;case 1:
+        if room==rm_backstage1{
+            MoveTo(obj_player,"sex1");
+            DrawSpriteExt(spr_gomrak,current_second%7,Camera.gui_w/2,Camera.gui_h*.6,GUISCALE+1,0,undefined,1);
+            if textbox.draw(text_preSex){
+                step++;
+                switch GAMESTATE{
+                    case stateFirstSong:
+                    obj_player.sprite_index=spr_blow1;
+                    break;case stateSecondSong:
+                    obj_player.sprite_index=spr_fuck1;
+                    break;case stateThirdSong:
+                    obj_player.sprite_index=spr_fuck2;
+                    break;
+                }
+            }
+        }
+        break;case 2:
+        sequence_alpha-=alphaSpeed;
+        if sequence_alpha<0{step++;}
+        break;case 3:
+        if kp_anykey{step++;}
+        break;case 4:
+        sequence_alpha+=alphaSpeed;
+        if sequence_alpha>=1{step++;}
+        break;case 5:
+        room_goto(rm_stage1);
+        with par_bard{visible=true;}
+        Gamestep();
+        Destroy();
+        break;
     }
 }

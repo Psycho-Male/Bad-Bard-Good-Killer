@@ -46,12 +46,15 @@ if kp_t{
 }
 for(var i=0;i<ds_list_size(fade_out_list);i++){
     var _audio=fade_out_list[|i];
-    if IsUndefined(_audio){
+    if !audio_is_playing(_audio){
         ds_list_delete(fade_out_list,i);
         continue;
     }
-    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio));
     var _currentGain=audio_sound_get_gain(_audio);
+    var _pos=audio_sound_get_track_position(_audio);
+    DebugAddGuiMessage("Fade out list");
+    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio)+" gain: "+str(_currentGain)+" pos: "+str(_pos));
+    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio)+" gain: "+str(_currentGain));
     if _currentGain==1{
         audio_sound_gain(_audio,0,2400);
     }else if _currentGain==0{
@@ -61,12 +64,14 @@ for(var i=0;i<ds_list_size(fade_out_list);i++){
 }
 for(var i=0;i<ds_list_size(fade_in_list);i++){
     var _audio=fade_in_list[|i];
-    if IsUndefined(_audio){
+    if !audio_is_playing(_audio){
         ds_list_delete(fade_in_list,i);
         continue;
     }
-    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio));
     var _currentGain=audio_sound_get_gain(_audio);
+    var _pos=audio_sound_get_track_position(_audio);
+    DebugAddGuiMessage("Fade in list");
+    DebugAddGuiMessage("_audio["+str(i)+"]: "+audio_get_name(_audio)+" gain: "+str(_currentGain)+" pos: "+str(_pos));
     if _currentGain==0{
         audio_sound_gain(_audio,1,2400);
     }else if _currentGain==0{

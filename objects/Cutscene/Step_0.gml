@@ -1,2 +1,2 @@
-DebugAddGuiMessage("step: "+str(step));
-DebugAddGuiMessage("timer: "+str(timer));
+//DebugAddGuiMessage("step: "+str(step));
+//DebugAddGuiMessage("timer: "+str(timer));
